@@ -1,54 +1,61 @@
-import { Text, View, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
-import { auth } from '../../firebase/config'
+import { Text, View, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import {auth} from '../../firebase/config'
 
-
-export default class Register extends Component {
-
+class Register extends Component {
     constructor(){
         super()
-        this.state = {
-            mail:'',
-            password:''
+        this.state ={
+            input1:'',
+            input2:''
         }
     }
 
-registreUsuarios(email, password){
-    /* auth.signInWithEmailAndPassword()*/
-   auth.createUserWithEmailAndPassword(email, password)
-   .then(resp => console.log(resp))
-   .catch(err => console.log(err))
-}
-
-    render() {
-        return (
-        <View>
-            <Text>Registra tu usuario</Text>
-
-            <View>
-                <TextInput
-                    style = {styles.input}
-                    onChangeText = {(text) => this.setState({mail: text})}
-                    value={this.state.mail}
-                    keyboardType='email-address'
-                    placeholder='Ingresa tu email'
-                />
-                <TextInput
-                    style = {styles.input}
-                    onChangeText = {(text) => this.setState({password: text})}
-                    value={this.state.password}
-                    keyboardType='default'
-                    secureTextEntry={true}
-                    placeholder='Ingresa tu password'
-                />
-            </View>
-        </View>
-        )
+    registrarUsuario(email, password){
+        auth.createUserWithEmailAndPassword(email, password)
+        .then(resp => console.log(resp))
+        .catch(err => console.log(err))      
     }
+
+  render() {
+    return (
+      <View>
+        <Text>Formulario</Text>
+        <TextInput
+            style={styles.input}
+            placeholder='Escribe tu email'
+            keyboardType='email-address'
+            onChangeText={text => this.setState({input1: text})}
+            value={this.state.input1}
+        />
+        <TextInput
+            style={styles.input}
+            placeholder='Escribe tu password'
+            keyboardType='default'
+            onChangeText={text => this.setState({input2: text})}
+            value={this.state.input2}
+            secureTextEntry={true}
+        />
+        <View>
+            <TouchableOpacity onPress={()=> this.registrarUsuario(this.state.input1, this.state.input2)}>
+                <Text>Registrarme</Text>
+            </TouchableOpacity>
+        </View>
+      </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
-    input:{
-        borderWidth: 1
-    }
-})
+    container:{
+      flex:1,
+      justifyContent:'center',
+      paddingHorizontal:24
+    },
+      input:{
+          borderWidth:1
+      }
+  })
+  
+
+export default Register

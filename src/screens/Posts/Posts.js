@@ -1,10 +1,10 @@
-import { Text, View, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import { Text, View, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
-import {db, auth} from '../../firebase/config'
+import {auth, db} from '../../firebase/config'
 
 
 class Posts extends Component {
-  
+
     constructor(){
         super()
         this.state={
@@ -12,29 +12,35 @@ class Posts extends Component {
         }
     }
 
-    enviarPost(text){
+    enviarPost(description){
         db.collection('posts').add({
             owner:auth.currentUser.email,
             createdAt: Date.now(),
-            description: text,
+            description: description,
             likes:[],
             comments:[]
         })
+        .then(resp => console.log('hizo el posteo'))
+        .catch(err => console.log(err))
 
     }
-  
+
+
+
     render() {
         return (
         <View>
             <TextInput
-            placeholder='Deja tu descripcion'
-            onChangeText={text => this.setState({description: text})}
-            value={this.state.description}
-            keyboardType='default'
-            style={styles.input}
+                keyboardType='default'
+                onChangeText={text => this.setState({description:text})}
+                value={this.state.description}
+                style={styles.input}
+                placeholder='Deja tu descripcion'
             />
-            <TouchableOpacity onPress={()=> this.enviarPost(this.state.description)}>
-                <Text>Enviar posts</Text>
+            <TouchableOpacity
+            onPress={()=> this.enviarPost(this.state.description)}
+            >
+                <Text>Enviar Post</Text>
             </TouchableOpacity>
         </View>
         )
@@ -43,8 +49,9 @@ class Posts extends Component {
 
 const styles = StyleSheet.create({
     input:{
-        height:32,
-        borderWidth:1
+        borderWidth:1,
+        height:48
     }
 })
+
 export default Posts

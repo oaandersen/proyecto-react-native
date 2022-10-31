@@ -1,4 +1,4 @@
-export const info = [
+ export const info = [
     {
     id: 1,
     title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
@@ -35,4 +35,4 @@ export const info = [
     id: 10,
     title: "Samsung 49-Inch CHG90 144Hz Curved Gaming Monitor (LC49HG90DMNXZA) – Super Ultrawide Screen QLED",
     },
-    ]
+]

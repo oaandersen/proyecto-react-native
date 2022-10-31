@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "clase-flexImageFlatList",
-    "slug": "clase-flexImageFlatList",
+    "name": "prueba-native",
+    "slug": "prueba-native",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

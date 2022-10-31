@@ -1,34 +1,34 @@
 import { View, Text } from 'react-native'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import React from 'react'
-import Home from '../screens/Home/Home'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {FontAwesome} from '@expo/vector-icons'
-import Profile from '../screens/Profile/Profile'
+import Home from '../screens/Home/Home'
+import Perfil from '../screens/Perfil/Perfil'
 import Posts from '../screens/Posts/Posts'
 
 const Tab = createBottomTabNavigator()
 
 export default function TabNavigation() {
   return (
-    <Tab.Navigator
-    /* screenOptions={
-        {
-            tabBarStyle:{
-                backgroundColor:'red'
-            }
-        }
-    } */
-    >
+    <Tab.Navigator>
         <Tab.Screen 
-        name={'Home'} 
+        name='Home' 
         component={Home}
         options={{
-            tabBarIcon: () => <FontAwesome name='home' color={'red'} size={32} />,
-            headerShown:false
+            tabBarIcon: () => <FontAwesome name='home' size={32} color='red' />
         }}
         />
-        <Tab.Screen name='Profile' component={Profile} />
-        <Tab.Screen name='Posts' component={Posts} />
+        <Tab.Screen
+        name='Perfil'
+        component={Perfil}
+        options={{
+            tabBarIcon: () => <FontAwesome name='music' size={32} color='red' />
+        }}
+        />
+        <Tab.Screen
+        name='NewPost'
+        component={Posts}
+        />
     </Tab.Navigator>
   )
 }

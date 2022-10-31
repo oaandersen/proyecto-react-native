@@ -1,12 +1,12 @@
 import { View, Text, Image, StyleSheet } from 'react-native'
 import React from 'react'
 
-export default function Card(props) {
+function Card(props) {
   return (
     <View>
         <Image
-            style={ styles.imagen}
-            source={{uri: props.info.image}}
+            style={styles.imagen}
+            source={{uri : props.info.image}}
             resizeMode='contain'
         />
         <Text>{props.info.title}</Text>
@@ -19,3 +19,5 @@ const styles = StyleSheet.create({
         height:100
     }
 })
+
+export default Card

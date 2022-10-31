@@ -1,81 +1,98 @@
-import { Text, View, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import React, { Component } from 'react'
-import { auth } from '../../firebase/config'
+import { Text, View, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import {auth, db} from '../../firebase/config'
 
 class Register extends Component {
-
     constructor(){
         super()
-        this.state={
+        this.state ={
+            username:'',
             email:'',
             password:'',
-            error:'',
-            bio:''
+            bio:'',
         }
     }
 
-    registrar(email, password, bio){
-        auth.createUserWithEmailAndPassword(email, password, bio)
-        .then( resp => this.props.navigation.navigate('TabNavigation'))
-        .catch( err => this.setState({error:err.message}))
+    registrarUsuario(username, email, password, bio){
+        auth.createUserWithEmailAndPassword(email, password)
+        .then(()=> {
+            return(
+                db.collection('users').add({
+                    email:email,
+                    username:username,
+                    bio:bio,
+                    createdAt:Date.now()
+                })
+            )
+        })
+        .then(resp => this.props.navigation.navigate('Home'))
+        .catch(err => console.log(err))      
     }
 
-    render() {
-        return (
-        <View style={styles.container}>
+  render() {
+    return (
+    <View style={styles.container}>
+        <View>
+            <Text>Formulario de registro</Text>
+            <TextInput
+                style={styles.input}
+                placeholder='Escribe tu nombre de usuario'
+                keyboardType='default'
+                onChangeText={text => this.setState({username: text})}
+                value={this.state.username}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder='Escribe tu biografia'
+                keyboardType='default'
+                onChangeText={text => this.setState({bio: text})}
+                value={this.state.bio}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder='Escribe tu email'
+                keyboardType='email-address'
+                onChangeText={text => this.setState({email: text})}
+                value={this.state.email}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder='Escribe tu password'
+                keyboardType='default'
+                onChangeText={text => this.setState({password: text})}
+                value={this.state.password}
+                secureTextEntry={true}
+            />
             <View>
-                <Text>Register</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder='Escribi tu email'
-                    onChangeText={text => this.setState({email: text})}
-                    value={this.state.email}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder='Escribi tu password'
-                    onChangeText={text => this.setState({password: text})}
-                    value={this.state.password}
-                    secureTextEntry={true}
-                />
-                            <TextInput
-                    style={styles.input}
-                    placeholder='Escribi tu biografia'
-                    onChangeText={text => this.setState({bio: text})}
-                    value={this.state.bio}
-                />
-                <View>
-                    <TouchableOpacity onPress={()=> this.registrar(this.state.email, this.state.password, this.state.bio)}>
-                        <Text>Registrar usuario</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <View>
-                    <Text>Ya tienes una cuenta?</Text>
-                    <TouchableOpacity onPress={()=> this.props.navigation.navigate('Login')}>
-                        <Text>Logueate</Text>
-                    </TouchableOpacity>
-                </View>
-                {
-                    this.state.error !== '' ?
-                    <Text>{this.state.error}</Text>:
-                    ''
-                }
+                <TouchableOpacity onPress={()=> this.registrarUsuario(this.state.username, this.state.email, this.state.password)}>
+                    <Text>Registrarme</Text>
+                </TouchableOpacity>
+            </View>
+            <View>
+                <Text>Ya tienes un cuenta?</Text>
+                <TouchableOpacity onPress={ () => this.props.navigation.navigate('Login')}>
+                    <Text>Logueate</Text>
+                </TouchableOpacity>
             </View>
         </View>
-        )
-    }
+    </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
     container:{
-        flex:1,
-        justifyContent:'center',
-        paddingHorizontal:32
+      flex:1,
+      justifyContent:'center',
+      paddingHorizontal:24
     },
     input:{
         borderWidth:1
+    },
+    containerRedirect:{
+        marginTop: 32
     }
-})
+  })
+  
 
 export default Register
