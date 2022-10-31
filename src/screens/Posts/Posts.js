@@ -43,6 +43,8 @@ class Posts extends Component {
                 <Text>Enviar Post</Text>
             </TouchableOpacity>
         </View>
+
+
         )
     }
 }
