@@ -13,7 +13,7 @@ class Comments extends Component {
     }
   }
 
-  componentDidMount(){
+  componentDidMount(){  
     db
     .collection('posts')
     .doc(this.props.route.params.id)
