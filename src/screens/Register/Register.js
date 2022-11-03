@@ -33,31 +33,31 @@ class Register extends Component {
     return (
     <View style={styles.container}>
         <View>
-            <Text>Formulario de registro</Text>
+            <Text style={styles.titulo} >Register</Text>
             <TextInput
                 style={styles.input}
-                placeholder='Escribe tu nombre de usuario'
+                placeholder='username'
                 keyboardType='default'
                 onChangeText={text => this.setState({username: text})}
                 value={this.state.username}
             />
             <TextInput
                 style={styles.input}
-                placeholder='Escribe tu biografia'
+                placeholder='biografi'
                 keyboardType='default'
                 onChangeText={text => this.setState({bio: text})}
                 value={this.state.bio}
             />
             <TextInput
                 style={styles.input}
-                placeholder='Escribe tu email'
+                placeholder='pepito@gmail.com'
                 keyboardType='email-address'
                 onChangeText={text => this.setState({email: text})}
                 value={this.state.email}
             />
             <TextInput
                 style={styles.input}
-                placeholder='Escribe tu password'
+                placeholder='password'
                 keyboardType='default'
                 onChangeText={text => this.setState({password: text})}
                 value={this.state.password}
@@ -65,13 +65,13 @@ class Register extends Component {
             />
             <View>
                 <TouchableOpacity onPress={()=> this.registrarUsuario(this.state.username, this.state.email, this.state.password)}>
-                    <Text>Registrarme</Text>
+                    <Text style={styles.sign}>Register</Text>
                 </TouchableOpacity>
             </View>
             <View>
-                <Text>Ya tienes un cuenta?</Text>
+                <Text style={styles.text}>Already have an account?</Text>
                 <TouchableOpacity onPress={ () => this.props.navigation.navigate('Login')}>
-                    <Text>Logueate</Text>
+                    <Text style={styles.sign}>Sign in</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -82,13 +82,42 @@ class Register extends Component {
 
 const styles = StyleSheet.create({
     container:{
-      flex:1,
-      justifyContent:'center',
-      paddingHorizontal:24
-    },
-    input:{
-        borderWidth:1
-    },
+        felx: 1,
+        backgroundColor: '#f1f1f1',
+        width: '100%',
+        marginVertical: 5,
+        padding: 15,
+        alignItems: 'center',
+        justifyContent:'center'
+      },
+      titulo:{
+        color: '#34434D',
+    fontSize: 80,
+    fontWeight:  'bold',
+      },
+      text:{
+        color: '#000',
+        fontSize: 20,
+      },
+        input:{
+    padding: 10,
+    paddingStart: 20,
+    width:'80%',
+    height: 50,
+    marginTop:20,
+    borderRadius: 30,
+    backgroundColor: '#fff',
+    color: 'gray',
+        },
+        sign:{
+          fontSize:14,
+          color: 'gray',
+          marginTop: 20,
+          width:'80%',
+          height: 50,
+          borderRadius: 25,
+          padding: 10,
+        },
     containerRedirect:{
         marginTop: 32
     }

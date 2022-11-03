@@ -32,35 +32,35 @@ class LoginScreen extends Component {
     return (
       <View style={styles.container}>
         <View>
-
-          <Text>Login</Text>
+        <Text style={styles.titulo} >Hello</Text>
+          <Text style={styles.text} >Sign in to your account</Text>
           <TextInput
               style={styles.input}
               keyboardType='email-address'
-              placeholder='Ingresa tu email'
+              placeholder='pepito@gmail.com'
               onChangeText={text => this.setState({email: text})}
               value={this.state.email}
           />
           <TextInput
               style={styles.input}
               keyboardType='default'
-              placeholder='Ingresa tu Password'
+              placeholder='password'
               onChangeText={text => this.setState({password: text})}
               value={this.state.password}
               secureTextEntry={true}
           />
           <View>
               <TouchableOpacity onPress={()=> this.loguear(this.state.email, this.state.password)}>
-                  <Text>Log In</Text>
+                  <Text style={styles.sign}>Sign in</Text>
               </TouchableOpacity>
           </View>
 
           <View>
-            <Text>
-              Aun no tienes una cuenta
+            <Text style={styles.text} >
+              Don't have an account?
             </Text>
             <TouchableOpacity onPress={()=> this.props.navigation.navigate('Register')}>
-              <Text>Registrate</Text>
+              <Text style={styles.sign}>Register</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -71,12 +71,41 @@ class LoginScreen extends Component {
 
 const styles = StyleSheet.create({
   container:{
-    flex:1,
-    justifyContent:'center',
-    paddingHorizontal:24
+    felx: 1,
+    backgroundColor: '#f1f1f1',
+    width: '100%',
+    marginVertical: 5,
+    padding: 15,
+    alignItems: 'center',
+    justifyContent:'center'
+  },
+  titulo:{
+    color: '#34434D',
+fontSize: 80,
+fontWeight:  'bold',
+  },
+  text:{
+    color: '#000',
+    fontSize: 20,
   },
     input:{
-        borderWidth:1
+padding: 10,
+paddingStart: 20,
+width:'80%',
+height: 50,
+marginTop:20,
+borderRadius: 30,
+backgroundColor: '#fff',
+color: 'gray',
+    },
+    sign:{
+      fontSize:14,
+      color: 'gray',
+      marginTop: 20,
+      width:'80%',
+      height: 50,
+      borderRadius: 25,
+      padding: 10,
     }
 })
 
