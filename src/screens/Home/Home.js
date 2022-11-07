@@ -13,6 +13,7 @@ import {info} from '../../api/data'
 import Post from '../../components/Post/Post'
 import {db} from '../../firebase/config'
 import Camara from '../../components/Camara/Camara'
+import Comments from '../Comments/Comments'
 
 class Home extends Component {
   constructor(){
@@ -54,6 +55,7 @@ class Home extends Component {
             keyExtractor={item => item.id.toString()}
             renderItem={({item}) => <Post navigation={this.props.navigation} id={item.id} data={item.data} />}
           />
+          
         </View>
       </>
     )

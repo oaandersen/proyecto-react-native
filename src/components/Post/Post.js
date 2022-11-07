@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import {FontAwesome} from '@expo/vector-icons'
 import {db, auth} from '../../firebase/config'
 import firebase from 'firebase'
+import Comments from '../../screens/Comments/Comments'
 
 class Post extends Component {
 
@@ -80,7 +81,10 @@ class Post extends Component {
         }
         </View>
         <View>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('Comments')}>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate(
+            'Comments',
+            {id:this.props.id}
+            )}>
             <Text>Agregar comentario</Text>
           </TouchableOpacity>
         </View>

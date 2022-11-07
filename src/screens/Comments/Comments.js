@@ -14,8 +14,7 @@ class Comments extends Component {
   }
 
   componentDidMount(){  
-    db
-    .collection('posts')
+    db.collection('posts')
     .doc(this.props.route.params.id)
     .onSnapshot(doc => {
       this.setState({
@@ -26,8 +25,7 @@ class Comments extends Component {
   }
 
   anhadirComentario(idDoc, text){
-    db
-    .collection('posts')
+    db.collection('posts')
     .doc(idDoc)
     .update({
       comments: firebase.firestore.FieldValue.arrayUnion({
@@ -39,7 +37,7 @@ class Comments extends Component {
   }
 
   render() {
-    console.log(this.props)
+    console.log(this.state)
     return (
       <View>
         <Text>Comments</Text>
@@ -50,6 +48,14 @@ class Comments extends Component {
           keyExtractor={ item => item.createdAt.toString()}
           renderItem={ ({item}) => 
           <Text> {item.comment} </Text>}/>
+
+          {
+            this.state.data.comments ?
+            <Text>Cantidad de Comentarios: {this.state.data.comments.length}</Text>
+            :
+            ''
+          }
+          
 
         </View>
         <View>
