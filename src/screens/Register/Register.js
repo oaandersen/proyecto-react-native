@@ -10,10 +10,14 @@ class Register extends Component {
             email:'',
             password:'',
             bio:'',
+            mensaje:'',
+            errorMensaje: '',
         }
     }
 
     registrarUsuario(username, email, password, bio){
+if (username.length >= 4 && email.includes('@') && password.length >= 4 && bio.length >= 0){
+
         auth.createUserWithEmailAndPassword(email, password)
         .then(()=> {
             return(
@@ -26,9 +30,17 @@ class Register extends Component {
             )
         })
         .then(resp => this.props.navigation.navigate('Home'))
-        .catch(err => console.log(err))      
+        .catch(err => console.log(this.setState({mensaje:err.message})))      
+    } else if (username.length <= 4){
+        this.setState({mensaje:'El Username requiere un minimo de 4 caracteres'})
+    } else if (!email.includes('@')){
+        this.setState({mensaje:'El mail no esta cargado correctamente'})        
+    } else if (password.length <= 5){
+        this.setState({mensaje:'La contrasena necesita un minimo de 6 caracteres'})        
+    }else if (bio.length <= 0){
+        this.setState({mensaje:'No puede quedar ningun campo vacio'})        
     }
-
+}
   render() {
     return (
     <View style={styles.container}>
@@ -63,8 +75,9 @@ class Register extends Component {
                 value={this.state.password}
                 secureTextEntry={true}
             />
+            <Text>{this.state.mensaje}</Text>
             <View>
-                <TouchableOpacity onPress={()=> this.registrarUsuario(this.state.username, this.state.email, this.state.password)}>
+                <TouchableOpacity onPress={()=> this.registrarUsuario(this.state.username, this.state.email, this.state.password, this.state.bio)}>
                     <Text style={styles.sign}>Register</Text>
                 </TouchableOpacity>
             </View>
