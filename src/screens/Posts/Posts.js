@@ -10,7 +10,7 @@ class Posts extends Component {
         this.state={
             description:'',
             mostrarCamara:true,
-            fotoUrl:''
+            url:''
         }
     }
 
@@ -21,7 +21,8 @@ class Posts extends Component {
             createdAt: Date.now(),
             description: description,
             likes:[],
-            comments:[]
+            comments:[],
+            photo: this.state.url
         })
         .then(resp => console.log('hizo el posteo'))
         .catch(err => console.log(err))
@@ -31,7 +32,7 @@ class Posts extends Component {
     cuandoSubaLaImagen(url){
         this.setState({
             mostrarCamara:false,
-            fotoUrl: url
+            url: url
         })
     }
 
@@ -40,9 +41,10 @@ class Posts extends Component {
             <View style = {styles.container}>
             {
                 this.state.mostrarCamara ?
-                <Camara
-                cuandoSubaLaImagen = {(url)=> this.cuandoSubaLaImagen(url)}
-                /> :
+                <Camara cuandoSubaLaImagen = {(url)=> this.cuandoSubaLaImagen(url)} />
+                :
+               
+            
         <View>
             <TextInput
                 keyboardType='default'
