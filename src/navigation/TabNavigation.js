@@ -12,22 +12,25 @@ export default function TabNavigation() {
   return (
     <Tab.Navigator>
         <Tab.Screen 
-        name='Home' 
+        name='Feed' 
         component={Home}
         options={{
-            tabBarIcon: () => <FontAwesome name='home' size={32} color='red' />
+            tabBarIcon: () => <FontAwesome name='home' size={32} color='Grey' />
         }}
         />
         <Tab.Screen
-        name='Perfil'
+        name='Profile'
         component={Perfil}
         options={{
-            tabBarIcon: () => <FontAwesome name='music' size={32} color='red' />
+            tabBarIcon: () => <FontAwesome name="user" size={32} color="Grey" />
         }}
         />
         <Tab.Screen
-        name='NewPost'
+        name='New Post'
         component={Posts}
+         options={{
+            tabBarIcon: () => <FontAwesome name="plus-square" size={32} color="Grey" />
+        }}
         />
     </Tab.Navigator>
   )
