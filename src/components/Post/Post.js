@@ -76,6 +76,8 @@ class Post extends Component {
         </TouchableOpacity>
         <Text>{this.props.username}</Text>
         <Image style={styles.image} source={this.props.data.photo} resizeMode={'contain'}/>
+
+        <View style={styles.datosPost}>
         <Text style={styles.tituloPost} >{this.props.data.description}</Text>
         <View>
         <Text>{this.state.likesCount}</Text>  
@@ -101,6 +103,7 @@ class Post extends Component {
           </TouchableOpacity>
         </View>
         
+      </View>
       </View>
     )
   }
@@ -131,6 +134,7 @@ const styles = StyleSheet.create({
   },
   tituloPost:{
     fontSize: '16px',
+    marginBottom: 10
     
   },
   owner:{
@@ -139,6 +143,9 @@ const styles = StyleSheet.create({
     backgroundColor: '',
     textAlign: 'center',
     marginTop: 15
+  },
+  datosPost:{
+    margin: 10
   }
 })
 

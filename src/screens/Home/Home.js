@@ -87,9 +87,12 @@ const styles = StyleSheet.create({
       color: '#34434D',
   fontSize: 80,
   fontWeight:  'bold',
+  
+  
   },
   container2:{
     width: '90%',
+    
   },
   container3:{
     flex:5,
@@ -100,7 +103,6 @@ const styles = StyleSheet.create({
     height: 300
   },
   post:{
-    
 
   }
   
