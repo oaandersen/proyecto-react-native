@@ -28,6 +28,7 @@ export default class Buscar extends Component {
       
           this.setState({
             guardarValor: search,
+            backup: search,
 
           })
       
@@ -36,7 +37,7 @@ export default class Buscar extends Component {
       
   
     buscarData(valor) { 
-        let userFiltrado = this.state.guardarValor.filter(elm => {
+        let userFiltrado = this.state.backup.filter(elm => {
             if(elm.data.email.toLowerCase().includes(valor)){
                 return elm
             }
@@ -44,8 +45,9 @@ export default class Buscar extends Component {
         this.setState({
             guardarValor: userFiltrado,
             buscar:valor
-        })
+        }, ()=> console.log(this.state.guardarValor))
       }
+      
 //TextInput ocupa en onChangeText y esta prop ejecuta un callback
 //En esa ejecucion podemos pasar el metodo con el que vamos a filtrar
 
@@ -53,17 +55,19 @@ export default class Buscar extends Component {
   render() {
     return (
         <View>
-        <FlatList
-            data={this.state.guardarValor}
-            keyExtractor={item => item.id.toString()}
-            renderItem={({item}) => 'hola mundo'}
-          />
-      <TextInput
+        <TextInput
       placeholder='Browse...'
       keyboardType='default'
       onChangeText={search => this.buscarData(search)}
       value={this.state.buscar}
       />
+        <FlatList
+        data={this.state.guardarValor}
+        keyExtractor={item => item.id.toString()}
+        renderItem={({item}) =>`${item.data.email}`}
+          />
+
+
         </View>
     )
   }
