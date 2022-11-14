@@ -101,7 +101,7 @@ buscarImagen(){
             />
             <View>
                         <TouchableOpacity onPress={()=> this.buscarImagen()}>
-                <Text>Browse profile image</Text>
+                <Text style={styles.foto}>Browse profile image</Text>
             </TouchableOpacity>
             </View>
             <Text>{this.state.mensaje}</Text>
@@ -162,7 +162,16 @@ const styles = StyleSheet.create({
         },
     containerRedirect:{
         marginTop: 32
-    }
+    },
+    foto:{
+        fontSize:15,
+        color: 'black',
+        marginTop: 20,
+        width:'80%',
+        height: 50,
+        borderRadius: 25,
+        padding: 10,
+      },
   })
   
 

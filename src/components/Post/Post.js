@@ -62,7 +62,7 @@ class Post extends Component {
   render() {
     console.log(this.props)
     return (
-      <View>
+      <View style={styles.post}>
         <TouchableOpacity onPress={()=> this.props.navigation.navigate(
           'Feed',
           {
@@ -115,6 +115,8 @@ const styles = StyleSheet.create({
   },
   image:{
       height:200
+  },
+  post:{
   }
 })
 
