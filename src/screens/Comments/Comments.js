@@ -63,7 +63,7 @@ class Comments extends Component {
             onChangeText={text => this.setState({nuevoComentario: text})}
             style = {styles.input}
             keyboardType='default'
-            placeholder='Anhadi tu comentario'
+            placeholder='Añadi tu comentario'
             value={this.state.nuevoComentario}
           />
           <TouchableOpacity onPress={()=> this.anhadirComentario(this.state.id, this.state.nuevoComentario)}>

@@ -2,10 +2,10 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {FontAwesome} from '@expo/vector-icons'
-import Home from '../screens/Home/Home'
 import Perfil from '../screens/Perfil/Perfil'
 import Posts from '../screens/Posts/Posts'
-
+import Home from '../screens/Home/Home'
+import Feed from './Feed'
 const Tab = createBottomTabNavigator()
 
 export default function TabNavigation() {
@@ -13,9 +13,10 @@ export default function TabNavigation() {
     <Tab.Navigator>
         <Tab.Screen 
         name='Feed' 
-        component={Home}
+        component={Feed}
         options={{
-            tabBarIcon: () => <FontAwesome name='home' size={32} color='Grey' />
+            tabBarIcon: () => <FontAwesome name='home' size={32} color='Grey' />,
+            headerShown:false
         }}
         />
         <Tab.Screen

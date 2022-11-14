@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Text, View, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import {auth, db} from '../../firebase/config'
+import * as ImagePicker from 'expo-image-picker'
+import {storage} from '../../firebase/config'
 
 class Register extends Component {
     constructor(){
@@ -12,6 +14,7 @@ class Register extends Component {
             bio:'',
             mensaje:'',
             errorMensaje: '',
+            profileImage:'',
         }
     }
 
@@ -40,6 +43,27 @@ if (username.length >= 4 && email.includes('@') && password.length >= 4 && bio.l
     }else if (bio.length <= 0){
         this.setState({mensaje:'No puede quedar ningun campo vacio'})        
     }
+}
+buscarImagen(){
+    ImagePicker.launchImageLibraryAsync()
+    .then(resp => {
+        fetch(resp.uri)
+        .then(data => data.blob())
+        .then(img => {
+            console.log(storage)
+            const ref = storage.ref(`profilePics/${Date.now()}.jpg`)
+            ref.put(img)
+            .then(()=> {
+                ref.getDownloadURL()
+                .then(url => {
+                        this.setState({profileImage:url})
+                    }
+                )
+            })
+        })
+        .catch(err => console.log(err))
+    })
+    .catch(err => console.log(err))
 }
   render() {
     return (
@@ -75,6 +99,11 @@ if (username.length >= 4 && email.includes('@') && password.length >= 4 && bio.l
                 value={this.state.password}
                 secureTextEntry={true}
             />
+            <View>
+                        <TouchableOpacity onPress={()=> this.buscarImagen()}>
+                <Text>Browse profile image</Text>
+            </TouchableOpacity>
+            </View>
             <Text>{this.state.mensaje}</Text>
             <View>
                 <TouchableOpacity onPress={()=> this.registrarUsuario(this.state.username, this.state.email, this.state.password, this.state.bio)}>

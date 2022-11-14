@@ -63,6 +63,18 @@ class Post extends Component {
     console.log(this.props)
     return (
       <View>
+        <TouchableOpacity onPress={()=> this.props.navigation.navigate(
+          'Feed',
+          {
+            screen: 'FriendProfile',
+            params:{
+              email:this.props.data.owner
+            }
+          }
+        )}>
+          <Text>{this.props.data.owner}</Text>
+        </TouchableOpacity>
+        <Text>{this.props.username}</Text>
         <Image style={styles.image} source={this.props.data.photo} resizeMode={'contain'}/>
         <Text>{this.props.data.description}</Text>
         <View>
