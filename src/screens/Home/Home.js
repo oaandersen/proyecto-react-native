@@ -22,7 +22,7 @@ class Home extends Component {
   componentDidMount(){
     db.collection('posts')
     .orderBy('createdAt', 'desc')
-    .limit(3)
+    .limit(10)
     .onSnapshot(docs => {
       let publicaciones = []
       docs.forEach(doc => {
@@ -89,7 +89,6 @@ const styles = StyleSheet.create({
   fontWeight:  'bold',
   },
   container2:{
-    flex:3,
     width: '90%',
   },
   container3:{

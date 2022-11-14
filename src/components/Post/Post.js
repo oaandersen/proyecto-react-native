@@ -72,11 +72,11 @@ class Post extends Component {
             }
           }
         )}>
-          <Text>{this.props.data.owner}</Text>
+          <Text style={styles.owner} >{this.props.data.owner}</Text>
         </TouchableOpacity>
         <Text>{this.props.username}</Text>
         <Image style={styles.image} source={this.props.data.photo} resizeMode={'contain'}/>
-        <Text>{this.props.data.description}</Text>
+        <Text style={styles.tituloPost} >{this.props.data.description}</Text>
         <View>
         <Text>{this.state.likesCount}</Text>  
        
@@ -108,15 +108,37 @@ class Post extends Component {
 }
 const styles = StyleSheet.create({
   container:{
-      flex:1
+      flex:1,
+      marginBottom: 20,
+      
   },
   camarabody:{
       height:500
   },
   image:{
-      height:200
+      height: 300,
+      width: 300,
+      resizeMode: 'contain',
+      margin: 15,
+      
+      
   },
   post:{
+    marginBottom: 60,
+    backgroundColor: 'lightgrey',
+    borderEndWidth: 10,
+    borderEndColor: 'black',
+  },
+  tituloPost:{
+    fontSize: '16px',
+    
+  },
+  owner:{
+    fontWeight: 'bold',
+    fontSize: '16px',
+    backgroundColor: '',
+    textAlign: 'center',
+    marginTop: 15
   }
 })
 
