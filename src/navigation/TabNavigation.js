@@ -6,6 +6,7 @@ import Perfil from '../screens/Perfil/Perfil'
 import Posts from '../screens/Posts/Posts'
 import Home from '../screens/Home/Home'
 import Feed from './Feed'
+import Buscar from '../screens/Buscar/Buscar'
 const Tab = createBottomTabNavigator()
 
 export default function TabNavigation() {
@@ -24,6 +25,13 @@ export default function TabNavigation() {
         component={Perfil}
         options={{
             tabBarIcon: () => <FontAwesome name="user" size={32} color="Grey" />
+        }}
+        />
+        <Tab.Screen
+        name='Search'
+        component={Buscar}
+         options={{
+            tabBarIcon: () => <FontAwesome name="search" size={32} color="Grey" />
         }}
         />
         <Tab.Screen
