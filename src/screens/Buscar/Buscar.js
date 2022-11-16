@@ -1,5 +1,4 @@
-import Busqueda from '../../components/Busqueda/Busqueda';
-import { Text, View, StyleSheet,  FlatList, TextInput} from 'react-native'
+ import { Text, View, StyleSheet,  FlatList, TextInput} from 'react-native'
 import React, { Component } from 'react'
 import {db} from '../../firebase/config'
 

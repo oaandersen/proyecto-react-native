@@ -12,7 +12,6 @@ import Post from '../../components/Post/Post'
 import {db} from '../../firebase/config'
 import Camara from '../../components/Camara/Camara'
 import Comments from '../Comments/Comments'
-import Busqueda from '../../components/Busqueda/Busqueda';
 class Home extends Component {
   constructor(){
     super()
