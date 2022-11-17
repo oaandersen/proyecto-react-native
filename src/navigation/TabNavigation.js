@@ -7,6 +7,8 @@ import Posts from '../screens/Posts/Posts'
 import Home from '../screens/Home/Home'
 import Feed from './Feed'
 import Buscar from '../screens/Buscar/Buscar'
+import { Camera } from 'expo-camera'
+
 const Tab = createBottomTabNavigator()
 
 export default function TabNavigation() {

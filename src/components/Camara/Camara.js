@@ -5,9 +5,10 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import {storage} from '../../firebase/config'
 
 
+
 class Camara extends Component {
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.metodosCamara = null
         this.state = {
             mostrarCamara:false,
@@ -50,9 +51,7 @@ class Camara extends Component {
         .catch(err => console.log(err))
     }
 
-    rechazarImagen(){
-
-    }
+    
 
   render() {
     return (
@@ -80,7 +79,7 @@ class Camara extends Component {
                         Aceptar imagen
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity  onPress={()=> this.rechazarImagen()}>
+                <TouchableOpacity  onPress={()=> this.props.navigation.navigate('Feed')}>
                     <Text>
                         Rechazar imagen
                     </Text>
