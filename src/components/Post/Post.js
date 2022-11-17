@@ -80,8 +80,9 @@ class Post extends Component {
         <View style={styles.datosPost}>
         <Text style={styles.tituloPost} >{this.props.data.description}</Text>
         <View>
-        <Text>{this.state.likesCount}</Text> 
-        <Text>{new Date(this.props.data.createdAt).toDateString()}</Text> 
+        <Text>Creado: {new Date(this.props.data.createdAt).toDateString()}</Text> 
+        <Text>Likes: {this.state.likesCount}</Text> 
+        
        
         {
            this.state.isMyLike ?
