@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native'
-import React from 'react'
+import React, {Component} from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {FontAwesome} from '@expo/vector-icons'
 import Perfil from '../screens/Perfil/Perfil'
@@ -7,12 +7,19 @@ import Posts from '../screens/Posts/Posts'
 import Home from '../screens/Home/Home'
 import Feed from './Feed'
 import Buscar from '../screens/Buscar/Buscar'
-import { Camera } from 'expo-camera'
-
 const Tab = createBottomTabNavigator()
 
-export default function TabNavigation() {
+class TabNavigation extends Component {
+	constructor(props) {
+    super(props);
+    console.log(props.route.params)
+	}
+
+	render() {
   return (
+    <>
+    
+    {this.props.route.params.loggin ?
     <Tab.Navigator>
         <Tab.Screen 
         name='Feed' 
@@ -24,7 +31,8 @@ export default function TabNavigation() {
         />
         <Tab.Screen
         name='Profile'
-        component={Perfil}
+        // component={Perfil}
+        children={(navProps) => <Perfil email={this.props.route.params.email} loggin={this.props.route.params.loggin} {...navProps}/>}
         options={{
             tabBarIcon: () => <FontAwesome name="user" size={32} color="Grey" />
         }}
@@ -44,5 +52,10 @@ export default function TabNavigation() {
         }}
         />
     </Tab.Navigator>
+     : null}
+    </>
   )
 }
+}
+
+export default TabNavigation

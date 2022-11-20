@@ -32,7 +32,7 @@ if (username.length >= 4 && email.includes('@') && password.length >= 4 && bio.l
                 })
             )
         })
-            .then(resp => this.props.navigation.navigate('Home'))
+            .then(resp => this.props.navigation.navigate('TabNavigation', {email}))
         .catch(err => console.log(this.setState({mensaje:err.message})))      
     } else if (username.length <= 4){
         this.setState({mensaje:'El Username requiere un minimo de 4 caracteres'})

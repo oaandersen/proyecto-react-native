@@ -12,11 +12,11 @@ class LoginScreen extends Component {
     }
 
     componentDidMount(){
-      auth.onAuthStateChanged(user => {
-        if(user !== null){
-          this.props.navigation.navigate('TabNavigation')
-        }
-      })
+      // auth.onAuthStateChanged(user => {
+      //   if(user !== null){
+      //     this.props.navigation.navigate('TabNavigation')
+      //   }
+      // })
       /* auth.signOut() */
     }
 
@@ -24,7 +24,7 @@ class LoginScreen extends Component {
     loguear(email, password){
         auth.signInWithEmailAndPassword(email, password)
         .then(resp => {
-            this.props.navigation.navigate('TabNavigation')
+            this.props.navigation.navigate('TabNavigation', {email, loggin: true})
         })
         .catch( err => console.log(err))
     }
