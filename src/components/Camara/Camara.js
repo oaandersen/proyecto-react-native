@@ -41,6 +41,7 @@ class Camara extends Component {
         .then(imagen => {
             const ref = storage.ref(`fotos/${Date.now()}.jpg`)
             ref.put(imagen)
+            
             .then(()=> {
                 ref.getDownloadURL()
                 .then((url)=> this.props.cuandoSubaLaImagen(url))
@@ -55,8 +56,10 @@ class Camara extends Component {
 
   render() {
     return (
+
       <View style={styles.container}>
         {
+
             this.state.mostrarCamara ?
             <>
                 <Camera
@@ -68,7 +71,10 @@ class Camara extends Component {
                     <Text>tomar foto</Text>
                 </TouchableOpacity>
             </>
+
+
             : this.state.mostrarCamara === false && this.state.fotoUri != '' ?
+
             <View>
                 <Image
                 source={{uri: this.state.fotoUri}}
@@ -85,12 +91,17 @@ class Camara extends Component {
                     </Text>
                 </TouchableOpacity>
             </View>
+
+
             : <Text>No me haz dado permisos para mostrar la foto</Text>
+
         }
       </View>
     )
   }
 }
+
+
 
 const styles = StyleSheet.create({
     container:{
