@@ -1,7 +1,11 @@
 import { 
-  View,  
-  StyleSheet,  
+  View, 
+  Text, 
+  StyleSheet, 
+  Image, 
   FlatList,
+  ActivityIndicator,
+  TouchableOpacity
 } from 'react-native'
 import React, {Component} from 'react'
 import Post from '../../components/Post/Post'
