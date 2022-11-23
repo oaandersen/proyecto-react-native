@@ -1,9 +1,17 @@
-import { View, Text, StyleSheet, Image,  FlatList, ActivityIndicator, TouchableOpacity} from 'react-native'
+import { 
+  View, 
+  Text, 
+  StyleSheet, 
+  Image, 
+  FlatList,
+  ActivityIndicator,
+  TouchableOpacity
+} from 'react-native'
 import React, {Component} from 'react'
 import Post from '../../components/Post/Post'
 import {db} from '../../firebase/config'
-import Camara from '../../components/Camara/Camara'
-import Comments from '../Comments/Comments'
+
+
 class Home extends Component {
   constructor(){
     super()
@@ -32,6 +40,7 @@ class Home extends Component {
     })
   }
 
+
   render(){
     return (
       <>
@@ -49,6 +58,8 @@ class Home extends Component {
     )
   }
 }
+
+
 
 const styles = StyleSheet.create({
   container1:{
