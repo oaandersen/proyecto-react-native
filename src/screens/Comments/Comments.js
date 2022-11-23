@@ -39,9 +39,9 @@ class Comments extends Component {
   render() {
     console.log(this.state)
     return (
-      <View>
+      <View style={styles.container}>
         <Text>Comments</Text>
-        <View>
+        
 
           <FlatList
           data={this.state.data.comments}
@@ -57,8 +57,8 @@ class Comments extends Component {
           }
           
 
-        </View>
-        <View>
+
+        <View style={styles.addComment}>
           <TextInput
             onChangeText={text => this.setState({nuevoComentario: text})}
             style = {styles.input}
@@ -76,10 +76,31 @@ class Comments extends Component {
 }
 
 const styles = StyleSheet.create({
-  input: {
-    borderWidth:1,
-    height:32
-  }
-})
+	container: {
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+		width: "100%",
+		height: "100%",
+		backgroundColor: "white",
+	},
+	addComment: {
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+		flexDirection: "row",
+		width: "80%",
+		margin: 8,
+	},
+	input: {
+		width: "70%",
+		borderWidth: 1,
+		borderColor: "#D4D4D4",
+		borderRadius: 8,
+		padding: 4,
+		margin: 8,
+	},
+});
+
 
 export default Comments

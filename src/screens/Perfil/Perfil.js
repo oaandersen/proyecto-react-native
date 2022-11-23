@@ -40,16 +40,16 @@ class Perfil extends Component {
             }}
           />
         </View>
-        <Text >Usuario: {this.state.user.username} </Text>
+        <Text >User: {this.state.user.username} </Text>
         <Text>Email: {this.state.user.email}</Text>
         {
-          this.state.user.bio ? <Text>Biografia: {this.state.user.bio}</Text>: ''
+          this.state.user.bio ? <Text>Biografi: {this.state.user.bio}</Text>: ''
         }
         <TouchableOpacity 
           onPress={() => this.signOut()}
           style={styles.logOut}  
         >
-          <Text style={styles.button}>Cerrar sesión</Text>
+          <Text style={styles.button}>Sign out</Text>
         </TouchableOpacity>
       </View>
     )
