@@ -42,12 +42,13 @@ class Comments extends Component {
       <View style={styles.container}>
         <Text>Comments</Text>
         
-
           <FlatList
           data={this.state.data.comments}
           keyExtractor={ item => item.createdAt.toString()}
-          renderItem={ ({item}) => 
-          <Text> {item.comment} </Text>}/>
+          renderItem={ ({item}) => <View>
+          <Text> {item.comment} </Text>
+          <Text>{item.owner}</Text>
+          </View>}/>
 
           {
             this.state.data.comments ?

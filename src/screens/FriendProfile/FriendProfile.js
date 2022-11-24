@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text} from 'react-native';
-import {FlatList } from 'react-native-web';
+import { View, Text, FlatList} from 'react-native';
 import { db } from '../../firebase/config';
 import Post from '../../components/Post/Post';
 
@@ -18,13 +17,13 @@ export default class FriendProfile extends Component {
     console.log(this.props);
     db.collection('posts').where('owner', '==', this.props.route.params.email)
       .onSnapshot(docs => {
-        let posts = []
-        docs.forEach(doc => { posts.push({
+        let posteos = []
+        docs.forEach(doc => { posteos.push({
             id: doc.id,
             data: doc.data()
           })
           this.setState({
-            friendPosts: posts,
+            friendPosts: posteos,
           }, () => console.log(this.state))
         })
       })
@@ -49,7 +48,6 @@ export default class FriendProfile extends Component {
   render() {
     return (
       <View>
-        <Text>My Profile</Text>
         <View>
           <Text>{this.state.username}</Text>
           <Text>{this.state.email}</Text>
