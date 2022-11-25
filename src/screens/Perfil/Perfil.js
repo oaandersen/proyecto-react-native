@@ -1,48 +1,57 @@
-import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList } from 'react-native'
-import React, { Component } from 'react'
-import { auth, db } from '../../firebase/config'
-import PostPerfil from '../../components/Post/PostPerfil'
+import React, { Component } from 'react';
+import { View, Text, TouchableOpacity, FlatList, StyleSheet, Image } from 'react-native';
+import { db, auth } from '../../firebase/config';
+import PostPerfil from '../../components/Post/PostPerfil';
 
 class Perfil extends Component {
-  constructor(props) { 
-    super(props) 
-    this.state = { 
-      user: {}, 
-      postsUser: [] 
+  constructor() {
+    super()
+    this.state = {
+      friendPosts: [],
+      user: [],
     }
   }
 
-  componentDidMount() { 
-    db.collection('users').where("email", "==", this.props.email).
-      onSnapshot(docs => {
-        let userProfile = {}
-        docs.forEach(doc => {
-          userProfile = doc.data();
+
+  componentDidMount() {
+    db.collection('posts').where('owner', '==', auth.currentUser.email).onSnapshot(docs => {
+      let posteos = []
+      docs.forEach(doc => {
+        posteos.push({
+          id: doc.id,
+          data: doc.data()
         })
         this.setState({
-          user: userProfile
-        }, () => console.log(this.state.user))
+          friendPosts: posteos,
+        }, () => console.log(this.state))
       })
-
-    db.collection('posts').where('owner', '==', this.props.email)
-      .onSnapshot(docs => {
-        let publicaciones = []
-        docs.forEach(doc => {
-          publicaciones.push({
-            id: doc.id,
-            data: doc.data()
-          })
+    })
+    db.collection('users').where('email', '==', auth.currentUser.email).onSnapshot(docs => {
+      let user = []
+      docs.forEach(doc => {
+        user.push({
+          id: doc.id,
+          data: doc.data()
         })
         this.setState({
-          postsUser: publicaciones
-        }, () => console.log(this.state.postsUser))
+          user: user[0],
+          username: user[0].data.userName,
+          bio: user[0].data.miniBio,
+          email: user[0].data.email
+        }, () => {
+          console.log(this.state)
+        })
       })
-
+    })
   }
 
   signOut() {
     auth.signOut().then(() => this.setState({ loggin: false }))
     this.props.navigation.navigate('Login')
+  }
+
+  deletePost() {
+    db.collection('posts').doc(this.props.id).delete()
   }
 
   render() {
@@ -56,40 +65,31 @@ class Perfil extends Component {
             }}
           />
         </View>
-        <Text >User: {this.state.user.username} </Text>
-        <Text>Email: {this.state.user.email}</Text>
-        {
-          this.state.user.bio ? <Text>Biografia: {this.state.user.bio}</Text> : ''
-        }
+        <View>
+          <Text>{this.state.username}</Text>
+          <Text>{this.state.email}</Text>
+          <Text>Posts: {this.state.friendPosts.length}</Text>
+          <Text>{this.state.bio}</Text>
+        </View>
+        <FlatList style={styles.container2}
+          data={this.state.friendPosts}
+          keyExtractor={item => item.id.toString()}
+          renderItem={({ item }) => <PostPerfil navigation={this.props.navigation} id={item.id} data={item.data} />}
+        />
+        <View>
+        <TouchableOpacity onPress={() => this.deletePost()}><Text>Eliminar Post</Text></TouchableOpacity>
+        </View>
         <TouchableOpacity
           onPress={() => this.signOut()}
           style={styles.logOut}
         >
           <Text style={styles.button}>Sign out</Text>
         </TouchableOpacity>
-        {
-          this.props.postsUser ?
-            <View style={{ flex: 1 }}>
-              <Text> Posts </Text>
-              <FlatList
-                style={styles.container2}
-                data={this.state.postsUser}
-                numColumns={3}
-                keyExtractor={item => item.id}
-                contentContainerStyle={{
-                  flexGrow: 1,
-                }}
-                renderItem={({ item }) => <PostPerfil id={item.id} data={item.data} />}
-              />
-              <View>
-                <Text>Cantidad de Posts: {this.state.postsUser.length}</Text>
-              </View>
-            </View>
-            : <Text> El usuario no posee posts creados</Text>
-        }
+        
       </View>
     )
   }
+
 }
 
 const styles = StyleSheet.create({

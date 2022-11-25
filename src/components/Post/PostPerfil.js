@@ -17,13 +17,6 @@ class PostPerfil extends Component {
         }
     }
 
-  
-
-    deletePost() {
-      db.collection('posts').doc(this.props.id).delete()
-    }
-    
-
   render() {
     return (
       <View style={styles.post}>
@@ -35,10 +28,8 @@ class PostPerfil extends Component {
         <View>
         <Text>{this.state.likesCount}</Text> 
         <Text>{new Date(this.props.data.createdAt).toDateString()}</Text> 
-       
-      
+        
         </View>
-        <TouchableOpacity onPress={() => this.deletePost()}><Text>Eliminar Post</Text></TouchableOpacity>
       </View>
       </View>
     )
